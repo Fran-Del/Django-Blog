@@ -1,0 +1,18 @@
+{% extends "blogs/base.html" %}
+
+{% block content %}
+    <h1>All Blog Posts</h1>
+    <ul>
+    {% for post in posts %}
+        <li>
+            <p>Last updated: {{ post.last_updated|date:'M d, Y H:i' }}</p>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.catch_phrase }}</p>
+            <button type="button" class="btn btn-default" style="background-color: #c4dfdf;"><a href="{% url 'blogs:post' post.id %}" class="text-decoration-none">Read More</a></button>
+        </li>
+    {% empty %}
+        <p>No posts yet!</p>
+    {% endfor %}
+    </ul>
+    {% include "blogs/pagination.html" with page=posts %}
+{% endblock %}
